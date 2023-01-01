@@ -162,14 +162,14 @@
                'address':null,
                'city':null,
                'state':null,
-               'zipcode':null,
+               'tel':null,
           }
           if (shipping != 'False'){
                // shippingInfo.numero = form.numero.value
                shippingInfo.address = form.address.value
                shippingInfo.city = form.city.value
                shippingInfo.state = form.state.value
-               shippingInfo.zipcode = form.zipcode.value
+               shippingInfo.tel = form.tel.value
           }
           if (user == 'AnonymousUser'){
                userFormData.name = form.name.value
@@ -189,7 +189,7 @@
           .then((response) => response.json())
           .then((data) => {
                console.log('Success:',data);
-               alert('Transaction Complète');
+               alert('Commande Valide ,Nous vous contactons dans le plus bref delais');
 
           cart = {}
           document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
