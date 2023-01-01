@@ -95,11 +95,11 @@ def  processOrder(request):
           ShippingAddress.objects.create(
                customer=customer,
                order=order,
-               numero=data['shipping']['numero'],
+               # numero=data['shipping']['numero'],
                address=data['shipping']['address'],
                city=data['shipping']['city'],
                state=data['shipping']['state'],
-               # zipcode=data['shipping']['zipcode'],
+               zipcode=data['shipping']['zipcode'],
                )
 
      return JsonResponse('Paiement Complète !', safe=False)

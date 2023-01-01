@@ -21,9 +21,9 @@
                          <hr>
                          <p>Informations :</p>
                          <hr>
-                         <div class="form-field">
+                         <!-- <div class="form-field">
                               <input class="form-control" type="text" name="numero" placeholder="Telephone..">
-                         </div>
+                         </div> -->
                          <div class="form-field">
                               <input class="form-control" type="text" name="address" placeholder="Adresse..">
                          </div>
@@ -33,9 +33,9 @@
                          <div class="form-field">
                               <input class="form-control" type="text" name="state" placeholder="Departem..">
                          </div>
-                         <!-- <div class="form-field">
-                              <input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
-                         </div> -->
+                         <div class="form-field">
+                              <input class="form-control" type="text" name="zipcode" placeholder="Numero..">
+                         </div>
                     </div>
                     <hr>
                     <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
@@ -44,7 +44,7 @@
           <br>
           <div class="box-element hidden" id="payment-info">
                <small>Paypal Options</small>
-               <div id="paypal-button-container"></div>
+               <!-- <div id="paypal-button-container"></div> -->
                <button  class="btn btn-info" id="make-payment">Effectuer le Paiement</button>
           </div>
 		
@@ -116,6 +116,8 @@
 <!-- // lA formulaire -->
 <script type="text/javascript">
      var shipping = '{{order.shipping}}'
+     var total = '{{order.get_cart_total|floatformat:0}}'
+
 
      if(shipping == 'False'){
           document.getElementById('shipping-info').innerHTML = ''
@@ -156,18 +158,18 @@
 
           }
           var shippingInfo= {
-               'numero':null,
+               // 'numero':null,
                'address':null,
                'city':null,
                'state':null,
-               // 'zipcode':null,
+               'zipcode':null,
           }
           if (shipping != 'False'){
-               shippingInfo.numero = form.numero.value
+               // shippingInfo.numero = form.numero.value
                shippingInfo.address = form.address.value
                shippingInfo.city = form.city.value
                shippingInfo.state = form.state.value
-               // shippingInfo.zipcode = form.zipcode.value
+               shippingInfo.zipcode = form.zipcode.value
           }
           if (user == 'AnonymousUser'){
                userFormData.name = form.name.value
