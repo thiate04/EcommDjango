@@ -3,6 +3,7 @@ from .models import *
 from django.http import JsonResponse
 import json
 import datetime
+import requests
 from .utils import cookieCart, cartData, guestOrder
 
 
@@ -19,6 +20,7 @@ def store(request):
      return render(request, 'store/store.html', context)
 
 
+# PANIER
 def cart(request):
 
      data = cartData(request)
@@ -30,6 +32,40 @@ def cart(request):
      return render(request, 'store/cart.html', context)
 
 
+# voir produits
+def voir(request):
+
+     # data = json.loads(request.body)
+     # data = cartData(request)
+     # cartItems = data['cartItems']
+     # order = data['order']
+     # items = data['items']
+ 
+     data = cartData(request)
+     cartItems = data['cartItems']
+     productId = data['productId']
+
+     products = Product.objects.all()
+     product = Product.objects.get(id=productId)
+     # orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+
+     context = {'products':products, 'cartItems':cartItems, 'product':product}
+     return render(request, 'store/voir.html', context)
+     # context = {'items':items, 'order':order, 'cartItems':cartItems}
+     # return render(request, 'store/voir.html', context)
+
+# CONTACT
+def contact(request):
+     data = cartData(request)
+     cartItems = data['cartItems']
+     order = data['order']
+     items = data['items']
+
+     context = {'items':items, 'order':order, 'cartItems':cartItems}
+     return render(request, 'store/contact.html', context)
+
+
+# CAISSE
 def checkout(request):
 
      data = cartData(request)
@@ -41,6 +77,7 @@ def checkout(request):
      return render(request, 'store/checkout.html', context)
 
 
+# MODIFIER ARTICLE
 def updateItem(request):
      data = json.loads(request.body)
      productId = data['productId']
@@ -103,3 +140,22 @@ def  processOrder(request):
                )
 
      return JsonResponse('Paiement Complète !', safe=False)
+
+
+
+     
+
+def make_payment(amount, phone_number):
+  headers = {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json"
+  }
+  data = {
+    "amount": amount,
+    "phoneNumber": phone_number
+  }
+  response = requests.post("https://api.orange.com/payment/v1/payments", headers=headers, json=data)
+  if response.status_code == 201:
+    return response.json()
+  else:
+    return {"error": "An error occurred while processing the payment."}

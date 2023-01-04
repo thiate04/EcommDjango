@@ -16,6 +16,19 @@ for(var i = 0; i < updateBtns.length; i++){
     })
 }
 
+// function showProduct(product) {
+//     console.log(productId);
+//   }
+  
+//   document.getElementById('see-product-button').addEventListener('click', function() {
+//     showProduct({
+//       image: item.product.imageURL,
+//       name: item.product.name,
+//       price: item.product.price,
+//     });
+//   });
+  
+
 function addCookieItem(productId, action){
     console.log('Non Connecté')
 
