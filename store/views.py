@@ -145,17 +145,17 @@ def  processOrder(request):
 
      
 
-def make_payment(amount, phone_number):
-  headers = {
-    "Authorization": "Bearer YOUR_API_KEY",
-    "Content-Type": "application/json"
-  }
-  data = {
-    "amount": amount,
-    "phoneNumber": phone_number
-  }
-  response = requests.post("https://api.orange.com/payment/v1/payments", headers=headers, json=data)
-  if response.status_code == 201:
-    return response.json()
-  else:
-    return {"error": "An error occurred while processing the payment."}
+# def make_payment(amount, phone_number):
+#   headers = {
+#     "Authorization": "Bearer YOUR_API_KEY",
+#     "Content-Type": "application/json"
+#   }
+#   data = {
+#     "amount": amount,
+#     "phoneNumber": phone_number
+#   }
+#   response = requests.post("https://api.orange.com/payment/v1/payments", headers=headers, json=data)
+#   if response.status_code == 201:
+#     return response.json()
+#   else:
+#     return {"error": "An error occurred while processing the payment."}
