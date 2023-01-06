@@ -2,236 +2,77 @@
 {% load static %}
 
 {% block content %}
+
+<!-- ///File: store/templates/store/cart.html -->
+
 <div class="row">
-     <!-- {% for product.id in products.id %} -->
-      <div class="col-lg-4" data-product="{{product.id}}">
-             <img class="thumbnail" src="{{product.id.imageURL}}">
+	<div class="col-lg-12">
+        <div class="box-element">
+            <a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continuer vos Achats </a>
+            <br>
+            <br>
+            <table class="table">
+                <tr>
+                    <th><h5>Articles: <strong>{{order.get_cart_items}}</strong></h5></th>
+                    <th><h5>Total: <strong>{{order.get_cart_total|floatformat:0}}F</strong></h5></th>
+                    <th>
+                        <a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Caisse</a>
+                    </th>
+                </tr>
+            </table>
+        </div>
+        <br>
+
+		<div class="box-element">
+            <div class="cart-row">
+                <div style="flex:2"></div>
+                <div style="flex:2"><strong>Article</strong></div>
+                <div style="flex:1"><strong>Prix</strong></div>
+                <div style="flex:1"><strong>Description</strong></div>
+                <div style="flex:1"><strong>Quantité</strong></div>
+                <div style="flex:1"><strong>Total</strong></div>
+            </div>
+            
+            {% for item in items %}
+            <div class="cart-row" >
+                <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+                <div style="flex:2"><p>{{item.product.name}}</p></div>
+                <div style="flex:1"><p>{{item.product.price|floatformat:0}}F</p></div>
+                <div style="flex:1"><p>{{item.product.description}}</p></div>
+                <div style="flex:1">
+                    <p class="quantity">{{item.quantity}}</p>
+                    <div class="quantity">
+                        <img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+                
+                        <img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+                    </div>
+                </div>
+                <div style="flex:1"><p>{{item.get_total}}F</p></div>
+            </div>
+            {% endfor %}
+
+		<br>
+	
+	</div>
+     
+</div>
+
+ <!-- <div class="row" data-product="{{product.id}}"> 
+     {% for product in products %}
+      <div class="col-lg-4">
+             <img class="thumbnail" src="{{product.imageURL}}">
              <div class="box-element product">
-                 <h6><strong>{{product.id.name}}</strong></h6>
+                 <h6><strong>{{product.name}}</strong></h6>
                  <hr>
-         
-                 <!-- <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Ajouter au Panier</button>
-                 <a class="btn btn-outline-success update-cart"   data-product="{{product.id}}" href="{% url 'voir' %}">Voir</a> -->
-                 <h4 style="display: inline-block; float: right">{{product.id.price|floatformat:0}}F</h4>
+                 <button data-product="{{product.id}}"  class="btn btn-outline-secondary add-btn update-cart"><strong><u>Description</u> : </strong>{{product.description}}</button><hr>
+                 <h4 style="display: inline-block; float: center">{{product.price|floatformat:0}}F</h4><br>
+                <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Ajouter au Panier</button>
+
          
              </div>
       </div>
-     <!-- {% endfor %} -->
+     {% endfor %}
  
- </div>
-     
-<div class="row ">
-	<!-- <div class="col-lg-6">
-		<div class="box-element" id="form-wrapper">
-               <form id="form">
-                    <div id="user-info">
-                         <div class="form-field">
-                              <input required class="form-control" type="text" name="name" placeholder="Nom..">
-                         </div>
-                         <div class="form-field">
-                              <input required class="form-control" type="email" name="email" placeholder="Email..">
-                         </div>
-                    </div>
-                    
-                    <div id="shipping-info">
-                         <hr>
-                         <p>Informations :</p>
-                         <hr>
-                       
-                         <div class="form-field">
-                              <input class="form-control" type="text" name="address" placeholder="Adresse..">
-                         </div>
-                         <div class="form-field">
-                              <input class="form-control" type="text" name="city" placeholder="Ville..">
-                         </div>
-                         <div class="form-field">
-                              <input class="form-control" type="text" name="state" placeholder="Departem..">
-                         </div>
-                         <div class="form-field">
-                              <input class="form-control" type="text" name="tel" placeholder="Telephone..">
-                         </div>
-                    </div>
-                    <hr>
-                    <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
-               </form>
-		</div>
-          <br>
-          <div class="box-element hidden" id="payment-info">
-               <small>Paypal Options</small>
-              <div id="paypal-button-container"></div> 
-               <button  class="btn btn-info" id="make-payment">Effectuer le Paiement</button>
-          </div>
-		
-	</div> -->
-
-	<!-- <div class="col-lg-8 ">
-		<div class="box-element">
-               <a  class="btn btn-outline-dark "   href="{% url 'store' %}">&#x2190; Retour au Magasin</a>
-               <hr>
-               <h3>Voir Produit :</h3>
-               <hr>
-               {% for item in items %}
-               <div class="cart-row">
-                    <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
-                    <div style="flex:2"><p>{{item.product.name}}</p></div>
-                    <div style="flex:1"><p>{{item.product.price}}F</p></div>
-                    <div style="flex:1"><p>x{{item.quantity}}</p></div>
-               </div>
-               {% endfor %}
-
-
-               {% for item in items %}
-               <h5>Article:   {{item.product.name}}</h5>
-               <h5>Prix:   {{item.product.price|floatformat:0}}F</h5>
-               {% endfor %}
-
-
-          </div>
-	</div> -->
-</div>
-
-<!-- <script>
-
-function showProduct(product) {
-    console.log(product);
-  }
-  
-  document.getElementById('voir').addEventListener('click', function() {
-    showProduct({
-      image: item.product.imageURL,
-      name: item.product.name,
-      price: item.product.price,
-    //   description: 'Des chaussures de course confortables et de haute qualité.'
-    });
-  });
-
-</script> -->
-
-<!-- <script>
-     var total = '{{order.get_cart_total|floatformat:0}}'
-     // Render the PayPal button into #paypal-button-container
-     paypal.Buttons({
-
-          style:{
-               color:'blue',
-               shape:'rect',
-          },
-
-         // Set up the transaction
-         createOrder: function(data, actions) {
-             return actions.order.create({
-                 purchase_units: [{
-                     amount: {
-                         value: parseFloat(total).toFixed(2)
-                     }
-                 }]
-             });
-         },
-
-         // Finalize the transaction
-         onApprove: function(data, actions) {
-             return actions.order.capture().then(function(orderData) {
-                 // Successful capture! For demo purposes:
-                 console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                 var transaction = orderData.purchase_units[0].payments.captures[0];
-                 submitFormData()
-                 // Replace the above to show a success message within this page, e.g.
-                 // const element = document.getElementById('paypal-button-container');
-                 // element.innerHTML = '';
-                 // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                 // Or go to another URL:  actions.redirect('thank_you.html');
-             });
-         }
-
-
-     }).render('#paypal-button-container');
- </script>  -->
-
-<!-- // lA formulaire -->
-<!-- <script type="text/javascript">
-     var shipping = '{{order.shipping}}'
-     var total = '{{order.get_cart_total|floatformat:0}}'
-
-
-     if(shipping == 'False'){
-          document.getElementById('shipping-info').innerHTML = ''
-     }
-
-     if(user != 'AnonymousUser'){
-          document.getElementById('user-info').innerHTML = ''
-     }
-
-    
-     if (shipping == 'False' && user != 'AnonymousUser'){
-
-          document.getElementById('form-wrapper').classList.add("hidden");
-
-          document.getElementById('payment-info').classList.remove("hidden");
-     }
-
-     var form =   document.getElementById('form')
-
-     form.addEventListener('submit', function(e){
-          e.preventDefault()
-          console.log('Formulaire soumis ')
-          document.getElementById('form-button').classList.add('hidden')
-          document.getElementById('payment-info').classList.remove('hidden')
-     })
-
-     document.getElementById('make-payment').addEventListener('click', function(e){
-          submitFormData()
-     })
-
-     function submitFormData(){
-          console.log('Bouton de paiement cliqué')
-
-          var userFormData = {
-               'name':null,
-               'email':null,
-               'total':total,
-
-          }
-          var shippingInfo= {
-               // 'numero':null,
-               'address':null,
-               'city':null,
-               'state':null,
-               'tel':null,
-          }
-          if (shipping != 'False'){
-               // shippingInfo.numero = form.numero.value
-               shippingInfo.address = form.address.value
-               shippingInfo.city = form.city.value
-               shippingInfo.state = form.state.value
-               shippingInfo.tel = form.tel.value
-          }
-          if (user == 'AnonymousUser'){
-               userFormData.name = form.name.value
-               userFormData.email = form.email.value
-              
-          }
-
-          var url = '/process_order/'
-          fetch(url, {
-               method:'POST',
-               headers:{
-                    'Content-Type':'application/json',
-                    'X-CSRFToken':csrftoken,
-               },
-               body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo})
-          })
-          .then((response) => response.json())
-          .then((data) => {
-               console.log('Success:',data);
-               alert('Commande Valide ,Nous vous contactons dans le plus bref delais');
-
-          cart = {}
-          document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
-
-               window.location.href = "{% url 'store' %}"
-          })
-     }
-
-</script> -->
+ </div>  -->
 
 {% endblock content %}

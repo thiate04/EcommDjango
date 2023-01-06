@@ -4,6 +4,7 @@
 {% block content %}
 
 <div class="row">
+    
     {% for product in products %}
 	<div class="col-lg-4">
             <img class="thumbnail" src="{{product.imageURL}}">
@@ -11,9 +12,9 @@
                 <h6><strong>{{product.name}}</strong></h6>
                 <hr>
         
-                <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Ajouter au Panier</button>
-                <a class="btn btn-outline-success update-cart"   data-product="{{product.id}}" href="{% url 'cart' %}">Voir</a>
-                <h4 style="display: inline-block; float: right">{{product.price|floatformat:0}}F</h4>
+                <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-success add-btn update-cart">Ajouter au Panier</button>
+                <a class="btn btn-outline-secondary  update-cart "   data-product="{{product.id}}" href="{% url 'voir' %}">Voir Commandes</a><hr>
+                <h4 style="display: inline-block; float: left">{{product.price|floatformat:0}}F</h4><br>
         
             </div>
 	</div>

@@ -3,7 +3,7 @@ from .models import *
 from django.http import JsonResponse
 import json
 import datetime
-import requests
+# import requests
 from .utils import cookieCart, cartData, guestOrder
 
 
@@ -36,23 +36,26 @@ def cart(request):
 def voir(request):
 
      # data = json.loads(request.body)
-     # data = cartData(request)
-     # cartItems = data['cartItems']
-     # order = data['order']
-     # items = data['items']
- 
      data = cartData(request)
      cartItems = data['cartItems']
-     productId = data['productId']
+     order = data['order']
+     items = data['items']
+ 
+     # data = cartData(request)
+     # cartItems = data['cartItems']
+     # productId = data['productId']
 
      products = Product.objects.all()
-     product = Product.objects.get(id=productId)
+     # customer = request.user.customer
+     # products = Product.objects.get(id=productId)
+     
+     # product = Product.objects.get(id=productId)
      # orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
 
-     context = {'products':products, 'cartItems':cartItems, 'product':product}
-     return render(request, 'store/voir.html', context)
-     # context = {'items':items, 'order':order, 'cartItems':cartItems}
+     # context = {'products':products, 'cartItems':cartItems, 'product':product}
      # return render(request, 'store/voir.html', context)
+     context = {'items':items, 'order':order, 'cartItems':cartItems, 'products':products}
+     return render(request, 'store/voir.html', context)
 
 # CONTACT
 def contact(request):
