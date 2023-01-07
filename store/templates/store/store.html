@@ -13,7 +13,7 @@
                 <hr>
         
                 <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-success add-btn update-cart">Ajouter au Panier</button>
-                <a class="btn btn-outline-secondary  update-cart "   data-product="{{product.id}}" href="{% url 'voir' %}">Voir Commandes</a><hr>
+                <a class="btn btn-outline-secondary " href="{{product.id}}">Voir</a><hr>
                 <h4 style="display: inline-block; float: left">{{product.price|floatformat:0}}F</h4><br>
         
             </div>

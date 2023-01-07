@@ -4,75 +4,64 @@
 {% block content %}
 
 <!-- ///File: store/templates/store/cart.html -->
-
+<!-- 
 <div class="row">
-	<div class="col-lg-12">
-        <div class="box-element">
-            <a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continuer vos Achats </a>
-            <br>
-            <br>
-            <table class="table">
-                <tr>
-                    <th><h5>Articles: <strong>{{order.get_cart_items}}</strong></h5></th>
-                    <th><h5>Total: <strong>{{order.get_cart_total|floatformat:0}}F</strong></h5></th>
-                    <th>
-                        <a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Caisse</a>
-                    </th>
-                </tr>
-            </table>
+    <div class="col-lg-6">
+        <div>
+            <img src="{{ product.imageURL }}" width="350px" height="350px" alt="">
         </div>
-        <br>
+    </div>
+    <div class="col-lg-6">
+        <div class=" display-4">
+            {{ product.name }}
+        </div><hr>
+        <div class=" ">
+           <strong>Prix : </strong>  {{product.price|floatformat:0}}F
+        </div><hr>
+        <div>
+            <strong>Description : </strong>  {{ product.description }}
+        </div><hr>
+      
+      
+         <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-success add-btn update-cart">Ajouter au Panier</button><hr>
 
-		<div class="box-element">
-            <div class="cart-row">
-                <div style="flex:2"></div>
-                <div style="flex:2"><strong>Article</strong></div>
-                <div style="flex:1"><strong>Prix</strong></div>
-                <div style="flex:1"><strong>Description</strong></div>
-                <div style="flex:1"><strong>Quantité</strong></div>
-                <div style="flex:1"><strong>Total</strong></div>
-            </div>
-            
-            {% for item in items %}
-            <div class="cart-row" >
-                <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
-                <div style="flex:2"><p>{{item.product.name}}</p></div>
-                <div style="flex:1"><p>{{item.product.price|floatformat:0}}F</p></div>
-                <div style="flex:1"><p>{{item.product.description}}</p></div>
-                <div style="flex:1">
-                    <p class="quantity">{{item.quantity}}</p>
-                    <div class="quantity">
-                        <img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
-                
-                        <img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
-                    </div>
+    </div>
+</div> -->
+ <div class="row">
+	<div class="col-lg-12">
+       
+		<div class="d-flex box-element" >
+            <div class="" >
+                <a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Retour au Panier</a>
                 </div>
-                <div style="flex:1"><p>{{item.get_total}}F</p></div>
+            <div class="col-lg-5">
+                <div>
+                    <img src="{{ product.imageURL }}" width="350px" height="350px" alt="">
+                </div>
             </div>
-            {% endfor %}
+            <div class="col-lg-4">
+                <div class=" display-4">
+                    {{ product.name }}
+                </div><hr>
+                <div class=" ">
+                   <strong>Prix : </strong>  {{product.price|floatformat:0}}F
+                </div><hr>
+                <div>
+                    <strong>Description : </strong>  {{ product.description }}
+                </div><hr>
+                <!-- <a href="#"><button class="btn btn-success">Acheter</button></a>
+                 -->
+                 <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-success add-btn update-cart">Ajouter au Panier</button><hr>
+        
+            </div>
+        </div>
 
 		<br>
 	
 	</div>
      
-</div>
+</div> 
 
- <!-- <div class="row" data-product="{{product.id}}"> 
-     {% for product in products %}
-      <div class="col-lg-4">
-             <img class="thumbnail" src="{{product.imageURL}}">
-             <div class="box-element product">
-                 <h6><strong>{{product.name}}</strong></h6>
-                 <hr>
-                 <button data-product="{{product.id}}"  class="btn btn-outline-secondary add-btn update-cart"><strong><u>Description</u> : </strong>{{product.description}}</button><hr>
-                 <h4 style="display: inline-block; float: center">{{product.price|floatformat:0}}F</h4><br>
-                <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Ajouter au Panier</button>
 
-         
-             </div>
-      </div>
-     {% endfor %}
- 
- </div>  -->
 
 {% endblock content %}
